@@ -15,7 +15,7 @@ namespace SuperHeroAPI.Models
         }
         public int SuperheroeID { get; set; }
         public int MisionCodigo { get; set; }
-        public Nullable<System.DateTime> FechaAsignacion { get; set; }
+        public DateTime? FechaAsignacion { get; set; }
 
         public virtual Misiones Misiones { get; set; }
         public virtual Superheroes Superheroes { get; set; }

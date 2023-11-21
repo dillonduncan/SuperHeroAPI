@@ -49,8 +49,12 @@ namespace SuperHeroAPI.Controllers
         }
 
         // DELETE: api/SuperHeroe/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var sph = db.Superheroes.FirstOrDefault(x => x.ID == id);
+            db.Superheroes.Remove(sph);
+            db.SaveChanges();
+            return Ok(sph);
         }
     }
 }

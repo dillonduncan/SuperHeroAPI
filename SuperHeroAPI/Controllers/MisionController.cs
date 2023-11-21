@@ -47,8 +47,12 @@ namespace SuperHeroAPI.Controllers
         }
 
         // DELETE: api/Mision/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var mision=db.Misiones.FirstOrDefault(x=> x.Codigo_Mision==id);
+            db.Misiones.Remove(mision);
+            db.SaveChanges();
+            return Ok(mision);
         }
     }
 }

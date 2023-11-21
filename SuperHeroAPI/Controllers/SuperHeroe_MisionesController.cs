@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -24,18 +25,37 @@ namespace SuperHeroAPI.Models
         }
 
         // POST: api/SuperHeroe_Mision
-        public void Post([FromBody] string value)
+        public IHttpActionResult Post([FromBody]Superheroes_Misiones sh_ms )
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            db.Superheroes_Misiones.Add(sh_ms);
+            db.SaveChanges();
+            return CreatedAtRoute("Defaultapi", new { id = sh_ms.SuperheroeID, id2 = sh_ms.MisionCodigo }, sh_ms);
         }
 
         // PUT: api/SuperHeroe_Mision/5
-        public void Put(int id, [FromBody] string value)
+        public IHttpActionResult Put([FromBody] Superheroes_Misiones sh_ms)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            db.Entry(sh_ms).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Ok(sh_ms);
         }
 
         // DELETE: api/SuperHeroe_Mision/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id,int id2)
         {
+            var sh_ms = db.Superheroes_Misiones.FirstOrDefault(x => x.SuperheroeID == id && x.MisionCodigo == id2);
+            db.Superheroes_Misiones.Remove(sh_ms);
+            db.SaveChanges();
+            return Ok(sh_ms);
         }
     }
 }

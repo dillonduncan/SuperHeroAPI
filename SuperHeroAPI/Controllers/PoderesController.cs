@@ -49,9 +49,12 @@ namespace SuperHeroAPI.Controllers
         }
 
         // DELETE: api/Poderes/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
-
+            var poder = db.Superpoderes.FirstOrDefault(x => x.CodigoPoder == id);
+            db.Superpoderes.Remove(poder);
+            db.SaveChanges();
+            return Ok(poder);
         }
     }
 }

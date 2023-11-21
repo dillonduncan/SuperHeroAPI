@@ -208,25 +208,28 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AgrupacionesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MisionController.cs" />
     <Compile Include="Controllers\PoderesController.cs" />
     <Compile Include="Controllers\SuperHeroeController.cs" />
     <Compile Include="Controllers\SuperHeroe_MisionesController.cs" />
     <Compile Include="Controllers\SuperHeroe_SuperPoderController.cs" />
+    <Compile Include="Controllers\TokenGenerater.cs" />
+    <Compile Include="Controllers\TokenValidationnHandler.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Agrupaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AgrupacionesModel.cs" />
+    <Compile Include="Models\EntitiesModels\AgrupacionesModel.cs" />
     <Compile Include="Models\Misiones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Misiones_Agrupaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MisionModel.cs" />
+    <Compile Include="Models\EntitiesModels\MisionModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -242,8 +245,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\SuperHeroe_MisionesModel.cs" />
-    <Compile Include="Models\SuperHeroeModel.cs" />
     <Compile Include="Models\Superheroes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -253,14 +254,17 @@
     <Compile Include="Models\Superheroes_Superpoderes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SuperHeroe_PoderModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperHeroe_MisionesModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperHeroeModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperHeroe_PoderModel.cs" />
     <Compile Include="Models\Superpoderes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SuperPoderModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperPoderModel.cs" />
     <Compile Include="Models\TipoMision.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntitiesModels\TipoMisionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

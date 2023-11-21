@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SuperHeroesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="SuperHeroesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Acompanantes">
           <Key>
             <PropertyRef Name="SuperheroeID" />
@@ -48,6 +48,7 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Misiones_Agrupaciones' no ti
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="nvarchar" MaxLength="255" />
           <Property Name="AnioDebut" Type="int" />
+          <Property Name="ContraseniaHero" Type="int" />
           <Property Name="PlanetaOrigenASuperHero" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errores durante la generación:
@@ -251,7 +252,8 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
             <End Role="Misiones" EntitySet="Misiones" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SuperHeroesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -284,10 +286,22 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="AnioDebut" Type="Int32" />
+          <Property Name="ContraseniaHero" Type="Int32" />
           <Property Name="PlanetaOrigenASuperHero" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Superheroes_Superpoderes" Relationship="Self.FK__Superhero__Super__46E78A0C" FromRole="Superheroes" ToRole="Superheroes_Superpoderes" />
           <NavigationProperty Name="Superheroes_Misiones" Relationship="Self.FK__Superhero__Super__5070F446" FromRole="Superheroes" ToRole="Superheroes_Misiones" />
           <NavigationProperty Name="Agrupaciones" Relationship="Self.Acompanantes" FromRole="Superheroes" ToRole="Agrupaciones" />
-          <NavigationProperty Name="Superheroes_Superpoderes" Relationship="SuperHeroesModel.FK__Superhero__Super__46E78A0C" FromRole="Superheroes" ToRole="Superheroes_Superpoderes" />
+        </EntityType>
+        <EntityType Name="Superheroes_Superpoderes">
+          <Key>
+            <PropertyRef Name="SuperheroeID" />
+            <PropertyRef Name="SuperpoderCodigo" />
+          </Key>
+          <Property Name="SuperheroeID" Type="Int32" Nullable="false" />
+          <Property Name="SuperpoderCodigo" Type="Int32" Nullable="false" />
+          <Property Name="NivelPoder" Type="Double" />
+          <NavigationProperty Name="Superheroes" Relationship="Self.FK__Superhero__Super__46E78A0C" FromRole="Superheroes_Superpoderes" ToRole="Superheroes" />
+          <NavigationProperty Name="Superpoderes" Relationship="Self.FK__Superhero__Super__47DBAE45" FromRole="Superheroes_Superpoderes" ToRole="Superpoderes" />
         </EntityType>
         <EntityType Name="Superpoderes">
           <Key>
@@ -295,7 +309,7 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
           </Key>
           <Property Name="CodigoPoder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombrePoder" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Superheroes_Superpoderes" Relationship="SuperHeroesModel.FK__Superhero__Super__47DBAE45" FromRole="Superpoderes" ToRole="Superheroes_Superpoderes" />
+          <NavigationProperty Name="Superheroes_Superpoderes" Relationship="Self.FK__Superhero__Super__47DBAE45" FromRole="Superpoderes" ToRole="Superheroes_Superpoderes" />
         </EntityType>
         <EntityType Name="TipoMision">
           <Key>
@@ -375,6 +389,18 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Superhero__Super__46E78A0C">
+          <End Role="Superheroes" Type="Self.Superheroes" Multiplicity="1" />
+          <End Role="Superheroes_Superpoderes" Type="Self.Superheroes_Superpoderes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Superheroes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Superheroes_Superpoderes">
+              <PropertyRef Name="SuperheroeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Superhero__Super__5070F446">
           <End Role="Superheroes" Type="Self.Superheroes" Multiplicity="1" />
           <End Role="Superheroes_Misiones" Type="Self.Superheroes_Misiones" Multiplicity="*" />
@@ -387,6 +413,18 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Superhero__Super__47DBAE45">
+          <End Role="Superpoderes" Type="Self.Superpoderes" Multiplicity="1" />
+          <End Role="Superheroes_Superpoderes" Type="Self.Superheroes_Superpoderes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Superpoderes">
+              <PropertyRef Name="CodigoPoder" />
+            </Principal>
+            <Dependent Role="Superheroes_Superpoderes">
+              <PropertyRef Name="SuperpoderCodigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Acompanantes">
           <End Role="Agrupaciones" Type="Self.Agrupaciones" Multiplicity="*" />
           <End Role="Superheroes" Type="Self.Superheroes" Multiplicity="*" />
@@ -395,6 +433,7 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
           <EntitySet Name="Agrupaciones" EntityType="Self.Agrupaciones" />
           <EntitySet Name="Misiones" EntityType="Self.Misiones" />
           <EntitySet Name="Superheroes" EntityType="Self.Superheroes" />
+          <EntitySet Name="Superheroes_Superpoderes" EntityType="Self.Superheroes_Superpoderes" />
           <EntitySet Name="Superpoderes" EntityType="Self.Superpoderes" />
           <EntitySet Name="TipoMision" EntityType="Self.TipoMision" />
           <EntitySet Name="Misiones_Agrupaciones" EntityType="Self.Misiones_Agrupaciones" />
@@ -415,59 +454,23 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
             <End Role="TipoMision" EntitySet="TipoMision" />
             <End Role="Misiones" EntitySet="Misiones" />
           </AssociationSet>
+          <AssociationSet Name="FK__Superhero__Super__46E78A0C" Association="Self.FK__Superhero__Super__46E78A0C">
+            <End Role="Superheroes" EntitySet="Superheroes" />
+            <End Role="Superheroes_Superpoderes" EntitySet="Superheroes_Superpoderes" />
+          </AssociationSet>
           <AssociationSet Name="FK__Superhero__Super__5070F446" Association="Self.FK__Superhero__Super__5070F446">
             <End Role="Superheroes" EntitySet="Superheroes" />
             <End Role="Superheroes_Misiones" EntitySet="Superheroes_Misiones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Superhero__Super__47DBAE45" Association="Self.FK__Superhero__Super__47DBAE45">
+            <End Role="Superpoderes" EntitySet="Superpoderes" />
+            <End Role="Superheroes_Superpoderes" EntitySet="Superheroes_Superpoderes" />
           </AssociationSet>
           <AssociationSet Name="Acompanantes" Association="Self.Acompanantes">
             <End Role="Agrupaciones" EntitySet="Agrupaciones" />
             <End Role="Superheroes" EntitySet="Superheroes" />
           </AssociationSet>
-          <EntitySet Name="Superheroes_Superpoderes" EntityType="SuperHeroesModel.Superheroes_Superpoderes" />
-          <AssociationSet Name="FK__Superhero__Super__46E78A0C" Association="SuperHeroesModel.FK__Superhero__Super__46E78A0C">
-            <End Role="Superheroes" EntitySet="Superheroes" />
-            <End Role="Superheroes_Superpoderes" EntitySet="Superheroes_Superpoderes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Superhero__Super__47DBAE45" Association="SuperHeroesModel.FK__Superhero__Super__47DBAE45">
-            <End Role="Superpoderes" EntitySet="Superpoderes" />
-            <End Role="Superheroes_Superpoderes" EntitySet="Superheroes_Superpoderes" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Superheroes_Superpoderes">
-          <Key>
-            <PropertyRef Name="SuperheroeID" />
-            <PropertyRef Name="SuperpoderCodigo" />
-          </Key>
-          <Property Name="SuperheroeID" Type="Int32" Nullable="false" />
-          <Property Name="SuperpoderCodigo" Type="Int32" Nullable="false" />
-          <Property Name="NivelPoder" Type="Double" />
-          <NavigationProperty Name="Superheroes" Relationship="SuperHeroesModel.FK__Superhero__Super__46E78A0C" FromRole="Superheroes_Superpoderes" ToRole="Superheroes" />
-          <NavigationProperty Name="Superpoderes" Relationship="SuperHeroesModel.FK__Superhero__Super__47DBAE45" FromRole="Superheroes_Superpoderes" ToRole="Superpoderes" />
-        </EntityType>
-        <Association Name="FK__Superhero__Super__46E78A0C">
-          <End Type="SuperHeroesModel.Superheroes" Role="Superheroes" Multiplicity="1" />
-          <End Type="SuperHeroesModel.Superheroes_Superpoderes" Role="Superheroes_Superpoderes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Superheroes">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Superheroes_Superpoderes">
-              <PropertyRef Name="SuperheroeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Superhero__Super__47DBAE45">
-          <End Type="SuperHeroesModel.Superpoderes" Role="Superpoderes" Multiplicity="1" />
-          <End Type="SuperHeroesModel.Superheroes_Superpoderes" Role="Superheroes_Superpoderes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Superpoderes">
-              <PropertyRef Name="CodigoPoder" />
-            </Principal>
-            <Dependent Role="Superheroes_Superpoderes">
-              <PropertyRef Name="SuperpoderCodigo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -499,7 +502,17 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="AnioDebut" ColumnName="AnioDebut" />
+                <ScalarProperty Name="ContraseniaHero" ColumnName="ContraseniaHero" />
                 <ScalarProperty Name="PlanetaOrigenASuperHero" ColumnName="PlanetaOrigenASuperHero" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Superheroes_Superpoderes">
+            <EntityTypeMapping TypeName="SuperHeroesModel.Superheroes_Superpoderes">
+              <MappingFragment StoreEntitySet="Superheroes_Superpoderes">
+                <ScalarProperty Name="SuperheroeID" ColumnName="SuperheroeID" />
+                <ScalarProperty Name="SuperpoderCodigo" ColumnName="SuperpoderCodigo" />
+                <ScalarProperty Name="NivelPoder" ColumnName="NivelPoder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -545,15 +558,6 @@ advertencia 6002: La tabla o vista 'SuperHeroes.dbo.Superheroes_Misiones' no tie
               <ScalarProperty Name="ID" ColumnName="SuperheroeID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Superheroes_Superpoderes">
-            <EntityTypeMapping TypeName="SuperHeroesModel.Superheroes_Superpoderes">
-              <MappingFragment StoreEntitySet="Superheroes_Superpoderes">
-                <ScalarProperty Name="NivelPoder" ColumnName="NivelPoder" />
-                <ScalarProperty Name="SuperpoderCodigo" ColumnName="SuperpoderCodigo" />
-                <ScalarProperty Name="SuperheroeID" ColumnName="SuperheroeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

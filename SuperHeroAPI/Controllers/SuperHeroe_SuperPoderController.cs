@@ -22,67 +22,42 @@ namespace SuperHeroAPI.Controllers
         // GET: api/SuperHeroe_SuperPoder/5
         public IHttpActionResult Get(int id)
         {
-            return Ok(db.Superheroes_Superpoderes.ToList().Where(a=>id==a.SuperpoderCodigo).Select(x => new SuperHeroe_PoderModel(x)).ToList());
+            return Ok(db.Superheroes_Superpoderes.ToList().Where(a => id == a.SuperpoderCodigo).Select(x => new SuperHeroe_PoderModel(x)).ToList());
         }
 
         // POST: api/SuperHeroe_SuperPoder
         public IHttpActionResult Post([FromBody] Superheroes_Superpoderes sph_sp)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            //db.Superheroes.Add(sph);
-            //db.SaveChanges();
-            //return CreatedAtRoute("DefaultApi", new {  }, sph);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+
+            }
+            db.Superheroes_Superpoderes.Add(sph_sp);
+            db.SaveChanges();
+            return CreatedAtRoute("Defaultapi", new { id = sph_sp.SuperheroeID, id2 = sph_sp.SuperpoderCodigo }, sph_sp);
+        }
+
+        // PUT: api/SuperHeroe_SuperPoder/5
+        public IHttpActionResult Put([FromBody] Superheroes_Superpoderes sph_sp)
+        {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.Superheroes_Superpoderes.Add(sph_sp);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (Superheroes_SuperpoderesExists(sph_sp.SuperheroeID))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = sph_sp.SuperheroeID }, sph_sp);
-        }
-
-        // PUT: api/SuperHeroe_SuperPoder/5
-        public void Put(int id, [FromBody]string value)
-        {
+            db.Entry(sph_sp).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return Ok(sph_sp);
         }
 
         // DELETE: api/SuperHeroe_SuperPoder/5
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(int id, int id2)
         {
-            Superheroes_Superpoderes superheroes_Superpoderes = db.Superheroes_Superpoderes.Find(id);
-            if (superheroes_Superpoderes == null)
-            {
-                return NotFound();
-            }
-
-            db.Superheroes_Superpoderes.Remove(superheroes_Superpoderes);
+            var sph_sp = db.Superheroes_Superpoderes.FirstOrDefault(x => x.SuperheroeID == id && x.SuperpoderCodigo == id2);
+            db.Superheroes_Superpoderes.Remove(sph_sp);
             db.SaveChanges();
+            return Ok(sph_sp);
+        }
 
-            return Ok(superheroes_Superpoderes);
-        }
-        private bool Superheroes_SuperpoderesExists(int id)
-        {
-            return db.Superheroes_Superpoderes.Count(e => e.SuperheroeID == id) > 0;
-        }
     }
 }

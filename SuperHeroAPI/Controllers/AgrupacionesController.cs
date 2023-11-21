@@ -48,8 +48,12 @@ namespace SuperHeroAPI.Controllers
         }
 
         // DELETE: api/Agrupaciones/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var agrupacion = db.Agrupaciones.FirstOrDefault(x => x.AgrupacionesID == id);
+            db.Agrupaciones.Remove(agrupacion);
+            db.SaveChanges();
+            return Ok(agrupacion);
         }
     }
 }

@@ -11,12 +11,12 @@ namespace SuperHeroAPI.Models
         {
             Codigo_Mision = mision.Codigo_Mision;
             Descripcion = mision.Descripcion;
-            TipoID = mision.TipoID;
+            TipoID =new TipoMisionModel(mision.TipoMision);
             Estado_Mision= mision.Estado_Mision;
         }
         public int Codigo_Mision { get; set; }
         public string Descripcion { get; set; }
-        public int TipoID { get; set; }
+        public TipoMisionModel TipoID { get; set; }
         public string Estado_Mision { get; set; }
     }
 }
