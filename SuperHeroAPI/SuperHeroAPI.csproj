@@ -223,6 +223,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntitiesModels\AgrupacionesModel.cs" />
+    <Compile Include="Models\request\LoginRequest.cs" />
     <Compile Include="Models\Misiones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -245,6 +246,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\request\SuperheroRequest.cs" />
+    <Compile Include="Models\response\LoginResponse.cs" />
+    <Compile Include="Models\response\SuperHeroResponse.cs" />
     <Compile Include="Models\Superheroes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

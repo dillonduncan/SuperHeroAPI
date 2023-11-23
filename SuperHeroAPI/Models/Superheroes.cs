@@ -25,7 +25,7 @@ namespace SuperHeroAPI.Models
         public int ID { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> AnioDebut { get; set; }
-        public Nullable<int> ContraseniaHero { get; set; }
+        public string ContraseniaHero { get; set; }
         public string PlanetaOrigenASuperHero { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

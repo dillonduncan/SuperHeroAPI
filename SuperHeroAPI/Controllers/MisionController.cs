@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace SuperHeroAPI.Controllers
 {
+    [Authorize]
     public class MisionController : ApiController
     {
         private SuperHeroesEntities1 db = new SuperHeroesEntities1();

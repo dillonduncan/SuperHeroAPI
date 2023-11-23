@@ -18,7 +18,7 @@ namespace SuperHeroAPI.Models
         public int SuperpoderCodigo { get; set; }
         public Nullable<double> NivelPoder { get; set; }
     
-        public virtual Superheroes Superheroes { get; set; }
         public virtual Superpoderes Superpoderes { get; set; }
+        public virtual Superheroes Superheroes { get; set; }
     }
 }

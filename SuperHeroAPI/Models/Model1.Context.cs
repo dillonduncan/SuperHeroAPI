@@ -27,11 +27,11 @@ namespace SuperHeroAPI.Models
     
         public virtual DbSet<Agrupaciones> Agrupaciones { get; set; }
         public virtual DbSet<Misiones> Misiones { get; set; }
-        public virtual DbSet<Superheroes> Superheroes { get; set; }
         public virtual DbSet<Superheroes_Superpoderes> Superheroes_Superpoderes { get; set; }
         public virtual DbSet<Superpoderes> Superpoderes { get; set; }
         public virtual DbSet<TipoMision> TipoMision { get; set; }
         public virtual DbSet<Misiones_Agrupaciones> Misiones_Agrupaciones { get; set; }
         public virtual DbSet<Superheroes_Misiones> Superheroes_Misiones { get; set; }
+        public virtual DbSet<Superheroes> Superheroes { get; set; }
     }
 }

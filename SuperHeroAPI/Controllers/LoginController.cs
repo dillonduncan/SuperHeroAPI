@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SuperHeroAPI.Models;
+using SuperHeroAPI.Models.response;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,31 +11,39 @@ namespace SuperHeroAPI.Controllers
 {
     public class LoginController : ApiController
     {
-        // GET: api/Login
-        public IEnumerable<string> Get()
+        [HttpPost]
+        [Route("login")]
+        public IHttpActionResult Index([FromBody] LoginRequest login)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/Login/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Login
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/Login/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Login/5
-        public void Delete(int id)
-        {
+            using (SuperHeroesEntities1 db = new SuperHeroesEntities1())
+            {
+                try
+                {
+                    SuperHeroResponse superhero = db.Superheroes.ToList()
+                        .Where(x => (login.Heroname.ToLower() == x.Nombre.ToLower() && x.ContraseniaHero.ToString() == login.Password.ToString()))
+                        .Select(x => new SuperHeroResponse()
+                        {
+                            Id = x.ID,
+                            Name = x.Nombre,
+                            // Debut=x.AnioDebut,
+                            PlanetaOrigen = x.PlanetaOrigenASuperHero
+                        }).FirstOrDefault();
+                    if (superhero == default(SuperHeroResponse))
+                    {
+                        return Content<LoginResponse>(System.Net.HttpStatusCode.Unauthorized, null);
+                    }
+                    return Ok(new LoginResponse()
+                    {
+                        Token = TokenGenerater.GenerateTokenJwt(superhero.Id.ToString()),
+                        DateTime = DateTime.Now,
+                        SuperHero = superhero,
+                    });
+                      
+                }
+                catch (Exception ex) { 
+                        return Content(System.Net.HttpStatusCode.BadRequest, ex);
+                }
+            }
         }
     }
 }

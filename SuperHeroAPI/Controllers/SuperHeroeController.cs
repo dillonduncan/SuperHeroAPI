@@ -9,6 +9,8 @@ using System.Web.Razor.Generator;
 
 namespace SuperHeroAPI.Controllers
 {
+    [Authorize]
+
     public class SuperHeroeController : ApiController
     {
         private SuperHeroesEntities1 db = new SuperHeroesEntities1();
@@ -27,13 +29,21 @@ namespace SuperHeroAPI.Controllers
         // POST: api/SuperHeroe
         public IHttpActionResult Post([FromBody] Superheroes sph)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                db.Superheroes.Add(sph);
+                db.SaveChanges();
+                return CreatedAtRoute("DefaultApi", new { id = sph.ID }, sph);
             }
-            db.Superheroes.Add(sph);
-            db.SaveChanges();
-            return CreatedAtRoute("DefaultApi", new { id = sph.ID }, sph);
+            catch(Exception ex)
+            {
+                return Content(System.Net.HttpStatusCode.BadRequest, ex.Message);
+                
+            }
         }
 
         // PUT: api/SuperHeroe/5
