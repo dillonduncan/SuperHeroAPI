@@ -12,7 +12,7 @@ namespace SuperHeroAPI.Controllers
     public class LoginController : ApiController
     {
         [HttpPost]
-        [Route("login")]
+        [Route("api/login")]
         public IHttpActionResult Index([FromBody] LoginRequest login)
         {
             using (SuperHeroesEntities1 db = new SuperHeroesEntities1())
@@ -25,18 +25,18 @@ namespace SuperHeroAPI.Controllers
                         {
                             Id = x.ID,
                             Name = x.Nombre,
-                            // Debut=x.AnioDebut,
                             PlanetaOrigen = x.PlanetaOrigenASuperHero
                         }).FirstOrDefault();
                     if (superhero == default(SuperHeroResponse))
                     {
+                       // Content<LoginResponse>()  
                         return Content<LoginResponse>(System.Net.HttpStatusCode.Unauthorized, null);
                     }
                     return Ok(new LoginResponse()
                     {
                         Token = TokenGenerater.GenerateTokenJwt(superhero.Id.ToString()),
                         DateTime = DateTime.Now,
-                        SuperHero = superhero,
+                        SuperHero = superhero
                     });
                       
                 }

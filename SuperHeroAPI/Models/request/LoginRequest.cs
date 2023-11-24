@@ -8,6 +8,6 @@ namespace SuperHeroAPI.Models
     public class LoginRequest
     {
         public String Heroname {  get; set; }
-        public int Password { get; set; }
+        public String Password { get; set; }
     }
 }
