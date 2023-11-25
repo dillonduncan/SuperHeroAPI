@@ -9,7 +9,7 @@ using System.Web.Razor.Generator;
 
 namespace SuperHeroAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
 
     public class SuperHeroeController : ApiController
     {
@@ -61,10 +61,17 @@ namespace SuperHeroAPI.Controllers
         // DELETE: api/SuperHeroe/5
         public IHttpActionResult Delete(int id)
         {
-            var sph = db.Superheroes.FirstOrDefault(x => x.ID == id);
-            db.Superheroes.Remove(sph);
+
+            Superheroes superheroes = db.Superheroes.Find(id);
+            if (superheroes == null)
+            {
+                return NotFound();
+            }
+
+            db.Superheroes.Remove(superheroes);
             db.SaveChanges();
-            return Ok(sph);
+
+            return Ok(superheroes);
         }
     }
 }
