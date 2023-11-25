@@ -15,7 +15,7 @@ namespace SuperHeroAPI.Controllers
         [Route("api/login")]
         public IHttpActionResult Index([FromBody] LoginRequest login)
         {
-            using (SuperHeroesEntities1 db = new SuperHeroesEntities1())
+            using (SuperHeroesEntities2 db = new SuperHeroesEntities2())
             {
                 try
                 {
@@ -36,7 +36,9 @@ namespace SuperHeroAPI.Controllers
                     {
                         Token = TokenGenerater.GenerateTokenJwt(superhero.Id.ToString()),
                         DateTime = DateTime.Now,
-                        SuperHero = superhero
+                        SuperHero = superhero,
+                        status=true
+                     
                     });
                       
                 }

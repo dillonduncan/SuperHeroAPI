@@ -12,7 +12,7 @@ namespace SuperHeroAPI.Models
 
     public class SuperHeroe_MisionController : ApiController
     {
-        private SuperHeroesEntities1 db = new SuperHeroesEntities1();
+        private SuperHeroesEntities2 db = new SuperHeroesEntities2();
 
         // GET: api/SuperHeroe_Mision
         public IHttpActionResult Get()

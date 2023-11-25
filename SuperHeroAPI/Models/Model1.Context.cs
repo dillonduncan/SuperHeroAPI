@@ -13,10 +13,10 @@ namespace SuperHeroAPI.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SuperHeroesEntities1 : DbContext
+    public partial class SuperHeroesEntities2 : DbContext
     {
-        public SuperHeroesEntities1()
-            : base("name=SuperHeroesEntities1")
+        public SuperHeroesEntities2()
+            : base("name=SuperHeroesEntities2")
         {
         }
     
@@ -27,11 +27,11 @@ namespace SuperHeroAPI.Models
     
         public virtual DbSet<Agrupaciones> Agrupaciones { get; set; }
         public virtual DbSet<Misiones> Misiones { get; set; }
+        public virtual DbSet<Superheroes> Superheroes { get; set; }
         public virtual DbSet<Superheroes_Superpoderes> Superheroes_Superpoderes { get; set; }
         public virtual DbSet<Superpoderes> Superpoderes { get; set; }
         public virtual DbSet<TipoMision> TipoMision { get; set; }
         public virtual DbSet<Misiones_Agrupaciones> Misiones_Agrupaciones { get; set; }
         public virtual DbSet<Superheroes_Misiones> Superheroes_Misiones { get; set; }
-        public virtual DbSet<Superheroes> Superheroes { get; set; }
     }
 }

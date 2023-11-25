@@ -223,14 +223,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntitiesModels\AgrupacionesModel.cs" />
-    <Compile Include="Models\request\LoginRequest.cs" />
     <Compile Include="Models\Misiones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Misiones_Agrupaciones.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesModels\MisionModel.cs" />
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -246,9 +244,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\request\LoginRequest.cs" />
+    <Compile Include="Models\EntitiesModels\MisionModel.cs" />
     <Compile Include="Models\request\SuperheroRequest.cs" />
     <Compile Include="Models\response\LoginResponse.cs" />
     <Compile Include="Models\response\SuperHeroResponse.cs" />
+    <Compile Include="Models\EntitiesModels\SuperHeroe_MisionesModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperHeroeModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperHeroe_PoderModel.cs" />
+    <Compile Include="Models\EntitiesModels\SuperPoderModel.cs" />
+    <Compile Include="Models\EntitiesModels\TipoMisionModel.cs" />
     <Compile Include="Models\Superheroes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -258,17 +263,12 @@
     <Compile Include="Models\Superheroes_Superpoderes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesModels\SuperHeroe_MisionesModel.cs" />
-    <Compile Include="Models\EntitiesModels\SuperHeroeModel.cs" />
-    <Compile Include="Models\EntitiesModels\SuperHeroe_PoderModel.cs" />
     <Compile Include="Models\Superpoderes.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesModels\SuperPoderModel.cs" />
     <Compile Include="Models\TipoMision.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitiesModels\TipoMisionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +326,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="Models\scrpit\scriptSuperHero.ipynb" />
     <EntityDeploy Include="Models\Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model1.Designer.cs</LastGenOutput>
@@ -333,7 +334,6 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
-    <Content Include="Models\scrpit\scriptSuperHero.ipynb" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

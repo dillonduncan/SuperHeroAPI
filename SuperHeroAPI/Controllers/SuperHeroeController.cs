@@ -9,11 +9,11 @@ using System.Web.Razor.Generator;
 
 namespace SuperHeroAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
 
     public class SuperHeroeController : ApiController
     {
-        private SuperHeroesEntities1 db = new SuperHeroesEntities1();
+        private SuperHeroesEntities2 db = new SuperHeroesEntities2();
         // GET: api/SuperHeroe
         public IHttpActionResult Get()
         {

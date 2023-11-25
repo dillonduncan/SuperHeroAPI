@@ -4,9 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="822dbb24c4784bd5a10f8a8db16e3cd9" Name="Diagram1">
+      <Diagram DiagramId="0e75213b455e41dd891adeb55b4d632f" Name="Diagram1">
         <EntityTypeShape EntityType="SuperHeroesModel.Agrupaciones" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SuperHeroesModel.Misiones" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="SuperHeroesModel.Superheroes" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SuperHeroesModel.Superheroes_Superpoderes" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SuperHeroesModel.Superpoderes" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SuperHeroesModel.TipoMision" Width="1.5" PointX="1.5" PointY="10.375" IsExpanded="true" />
@@ -16,11 +17,10 @@
         <AssociationConnector Association="SuperHeroesModel.FK__Superhero__Misio__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="SuperHeroesModel.FK_Misiones_Agrupaciones_Misiones" ManuallyRouted="false" />
         <AssociationConnector Association="SuperHeroesModel.FK_Misiones_TipoMision" ManuallyRouted="false" />
+        <AssociationConnector Association="SuperHeroesModel.FK__Superhero__Super__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="SuperHeroesModel.FK__Superhero__Super__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="SuperHeroesModel.FK__Superhero__Super__47DBAE45" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SuperHeroesModel.Superheroes" Width="1.5" PointX="3" PointY="13.625" />
-        <AssociationConnector Association="SuperHeroesModel.FK__Superhero__Super__46E78A0C" />
-        <AssociationConnector Association="SuperHeroesModel.FK__Superhero__Super__5070F446" />
-        <AssociationConnector Association="SuperHeroesModel.Acompanantes" />
+        <AssociationConnector Association="SuperHeroesModel.Acompanantes" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

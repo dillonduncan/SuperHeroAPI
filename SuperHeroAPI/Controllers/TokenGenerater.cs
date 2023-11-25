@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using SuperHeroAPI.Models.response;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,6 +13,7 @@ namespace SuperHeroAPI.Controllers
     {
         public static string GenerateTokenJwt(string nameUser)
         {
+            LoginResponse loginResponse = new LoginResponse();
             var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
@@ -32,7 +34,9 @@ namespace SuperHeroAPI.Controllers
             expires: DateTime.UtcNow.AddMinutes(Convert.ToInt32(expireTime)),
             signingCredentials: signingCredentials);
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
+            
             return jwtTokenString;
+            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace SuperHeroAPI.Controllers
 
     public class SuperHeroe_SuperPoderController : ApiController
     {
-        private SuperHeroesEntities1 db = new SuperHeroesEntities1();
+        private SuperHeroesEntities2 db = new SuperHeroesEntities2();
 
         // GET: api/SuperHeroe_SuperPoder
         public IHttpActionResult Get()

@@ -10,5 +10,6 @@ namespace SuperHeroAPI.Models.response
         public String Token { get; set; }
         public SuperHeroResponse SuperHero { get; set; }
         public DateTime DateTime { get; set; }
+        public Boolean status {  get; set; }
     }
 }
